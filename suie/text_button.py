@@ -1,7 +1,7 @@
 # Click-able button with text
 import pygame
-import suie
-import asset_manager
+import assets
+from suie import Element, SuieContext
 
 # CONSTANTS
 DEFAULT_SIZE = 12
@@ -15,9 +15,9 @@ BTN_STATE_MOUSEOVER = 1
 BTN_STATE_PRESSED = 2
 
 
-class TextButton(suie.Element):
+class TextButton(Element):
     def __init__(self, position, text: str, callback):
-        suie.Element.__init__(self, position)
+        Element.__init__(self, position)
         self._text = text
         self._callback = callback
         self._default_surface = pygame.Surface((281, 56), pygame.SRCALPHA, 32)
@@ -27,17 +27,18 @@ class TextButton(suie.Element):
                               self._highlight_surface,
                               self._pressed_surface]
         self._state = BTN_STATE_DEFAULT
+        self._font_object = assets.load_font(SuieContext.Instance.default_font,
+                                             SuieContext.Instance.default_font_size)
 
         # Initial render
         self._render()
 
     def _render(self):
-        self._default_surface.blit(suie.SOURCE_IMAGE, (0, 0), DEFAULT_BTN_RECT)
-        self._highlight_surface.blit(suie.SOURCE_IMAGE, (0, 0), HIGHLIGHT_BTN_RECT)
-        self._pressed_surface.blit(suie.SOURCE_IMAGE, (0, 0), PRESSED_BTN_RECT)
+        self._default_surface.blit(SuieContext.Instance.source_image, (0, 0), DEFAULT_BTN_RECT)
+        self._highlight_surface.blit(SuieContext.Instance.source_image, (0, 0), HIGHLIGHT_BTN_RECT)
+        self._pressed_surface.blit(SuieContext.Instance.source_image, (0, 0), PRESSED_BTN_RECT)
 
-        font = asset_manager.load_font(suie.default_font_type, DEFAULT_SIZE)
-        font_surface = font.render(self._text, False, DEFAULT_COLOR)
+        font_surface = self._font_object.render(self._text, False, DEFAULT_COLOR)
         font_size = font_surface.get_rect()[2:4]
 
         locx = (281 - font_size[0]) / 2

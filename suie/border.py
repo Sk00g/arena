@@ -1,6 +1,6 @@
 # A border using custom images, surrounding a colored background
 import pygame
-import suie
+from suie import Element, SuieContext
 
 # CONSTANTS
 BORDER_TYPE_NONE = 0
@@ -18,10 +18,10 @@ SINGLE_RECTS = [
 ]
 
 
-class Border(suie.Element):
+class Border(Element):
     # Size parameter defines the size INSIDE the border
     def __init__(self, position, size, bgnd_color=(0, 0, 0), border_type=BORDER_TYPE_SINGLE):
-        suie.Element.__init__(self, position)
+        Element.__init__(self, position)
         self._size = size
         # Including border pixels
         self._full_size = (size[0] + SINGLE_BORDER_SIZE, size[1] + SINGLE_BORDER_SIZE)
@@ -36,7 +36,7 @@ class Border(suie.Element):
     def _populate_surface_list(self):
         for rect in SINGLE_RECTS:
             surf = pygame.Surface(size=rect[2:4])
-            surf.blit(suie.SOURCE_IMAGE, (0, 0), rect)
+            surf.blit(SuieContext.Instance.source_image, (0, 0), rect)
             self._surface_list.append(surf)
 
     def _render(self):

@@ -1,12 +1,12 @@
 # Base GUI panel for placing and arranging UI elements, contains no visual elements
 import pygame
-import suie
+from suie import Element
 
 
-class Panel(suie.Element):
+class Panel(Element):
     # Optionally give a new panel a list of starting children
     def __init__(self, position, size, child_list=None):
-        suie.Element.__init__(self, position)
+        Element.__init__(self, position)
         self._size = size
         self._child_list = []
 
@@ -17,11 +17,11 @@ class Panel(suie.Element):
     def get_display_rect(self):
         return pygame.Rect(self._position + self._size)
 
-    def add_child(self, child: suie.Element):
+    def add_child(self, child: Element):
         self._child_list.append(child)
         child._host_panel = self
 
-    def remove_child(self, child: suie.Element):
+    def remove_child(self, child: Element):
         self._child_list.remove(child)
         child._host_panel = None
 

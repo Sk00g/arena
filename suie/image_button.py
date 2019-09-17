@@ -1,6 +1,6 @@
 # Clickable image, use outline to show mouse, shift and lines to show click
 import pygame
-import suie
+from suie import Element, Image
 
 # CONSTANTS
 HIGHLIGHT_COLOR = (50, 220, 255, 255)
@@ -11,10 +11,10 @@ BTN_STATE_MOUSEOVER = 1
 BTN_STATE_PRESSED = 2
 
 
-class ImageButton(suie.Element):
+class ImageButton(Element):
     def __init__(self, image: pygame.Surface, callback, position, size=None, source_rect=None):
-        suie.Element.__init__(self, position)
-        self.icon = suie.Image(image, position, size, source_rect)
+        Element.__init__(self, position)
+        self.icon = Image(image, position, size, source_rect)
         self._callback = callback
         self._state = BTN_STATE_DEFAULT
         self._highlight_surface = pygame.Surface(size, pygame.SRCALPHA, 32)

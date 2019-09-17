@@ -1,5 +1,5 @@
 import pygame
-import asset_manager
+from assets import asset_manager
 from vector import Vector
 
 

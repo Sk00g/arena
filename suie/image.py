@@ -1,11 +1,11 @@
 # Read-only, non-focusable image for GUI
 import pygame
-import suie
+from suie import Element
 
 
-class Image(suie.Element):
+class Image(Element):
     def __init__(self, image: pygame.Surface, position, size=None, source_rect=None):
-        suie.Element.__init__(self, position)
+        Element.__init__(self, position)
 
         self._size = size if size else image.get_rect()[2:4]
         self._flipx = False

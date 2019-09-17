@@ -3,6 +3,16 @@ import os
 import pygame
 import json
 
+"""
+PUBLIC INTERFACE:
+
+    :func load_image(file_path: str, extension: str, color_key=None)
+    :func load_font(font_name: str, size: int)
+    
+    * Note that 'file_path' should be given in dot-path notation, so that behind the scenes the correct
+      file path joining can be used
+
+"""
 
 # CONSTANTS
 
@@ -10,11 +20,13 @@ import json
 __image_dict = {}
 __font_dict = {}
 
-def load_image(file_path: str, color_key=None):
+def load_image(file_path: str, extension: str, color_key=None):
+    file_path = os.path.join('./assets', *file_path.split('.')) + '.' + extension
+
     if file_path in __image_dict:
         return __image_dict[file_path]
 
-    fullname = os.path.join('./assets', file_path)
+    fullname = os.path.join(file_path)
     try:
         image = pygame.image.load(fullname)
     except pygame.error as message:

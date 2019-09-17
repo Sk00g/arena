@@ -1,0 +1,1 @@
+from .asset_manager import load_font, load_image

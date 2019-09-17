@@ -1,6 +1,6 @@
 import json
 import os
-import asset_manager
+from assets import asset_manager
 import suie
 from pygame import Rect
 from animated_sprite import AnimatedSprite
