@@ -4,8 +4,9 @@
 class GameScene:
     scene_stack = []
 
-    def __init__(self):
+    def __init__(self, suie_context):
         GameScene.scene_stack.append(self)
+        self.suie_context = suie_context
 
     @staticmethod
     def pop_scene():

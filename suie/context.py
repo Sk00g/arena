@@ -11,13 +11,7 @@ CONSTRUCTOR
 """
 
 class SuieContext:
-    Instance = None
-
     def __init__(self, source_image, screen_width, screen_height, default_font, default_font_size=12):
-        # Verify singleton pattern
-        if SuieContext.Instance:
-            raise Exception("'SuiContext' can only be instantiated once per game")
-
         # Suie engine is only relevant when used with pygame
         pygame.init()
 
@@ -27,6 +21,3 @@ class SuieContext:
         self.screen_height = screen_height
         self.default_font = default_font
         self.default_font_size = default_font_size
-
-        # Singleton pattern. Only hold a single instance at a time that can be referenced anywhere
-        SuieContext.Instance = self
