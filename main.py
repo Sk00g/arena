@@ -6,15 +6,18 @@ from timer import Timer
 from scenes import GameScene, SetupScene
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
 
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
 # Initialize pygame display
 pygame.init()
 pygame.display.set_caption('Arena')
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 # Initialize global suie context (singleton)
 suie.SuieContext(assets.load_image('ui.suiSource', 'png'),
-                 800, 600, 'emulogic', 12)
+                 SCREEN_WIDTH, SCREEN_HEIGHT, 'emulogic', 12)
 
 # Initialize game by creating our first game scene (automatic load to GameScene static_stack)
 first_scene = SetupScene()
